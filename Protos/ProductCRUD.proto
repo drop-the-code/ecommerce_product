@@ -15,7 +15,7 @@ message Empty {}
 message Product {
   int32 productID = 1;
   string productName = 2;
-  float productPrice = 3;
+  double productPrice = 3;
   string providerCNPJ = 4;
   string description = 5;
 }

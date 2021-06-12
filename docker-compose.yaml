@@ -1,0 +1,13 @@
+version: "2"
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=<YourStrong@Passw0rd>
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
