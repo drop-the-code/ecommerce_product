@@ -1,7 +1,6 @@
 .git/
 .idea/
 bin/
-ecommerce_product.csproj
 
 # Build results
 [Dd]ebug/
