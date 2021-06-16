@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using GrpcService1;
+using Microsoft.EntityFrameworkCore;
 
 namespace ecommerce_product.Services
 
@@ -9,10 +10,11 @@ namespace ecommerce_product.Services
     public class ProductService : ProductCRUD.ProductCRUDBase
     {
         private DataAccess.AppDbContext db = null;
-
+        
         public ProductService(DataAccess.AppDbContext db)
         {
             this.db = db;
+            this.db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
         public override Task<Products> SelectAll(Empty request, ServerCallContext context)
         {
@@ -29,9 +31,9 @@ namespace ecommerce_product.Services
             return Task.FromResult(responseData);
         }
 
-        public override Task<Product> SelectByID(ProductID request, ServerCallContext context)
+        public override Task<Product> SelectByID(ProductFilter request, ServerCallContext context)
         {
-            var query = db.Products.Find(request.ProductID_);
+            var query = db.Products.Find(request.ProductID);
             Product prod = new Product()
             {
                 ProductID = query.ProductID,
@@ -71,9 +73,10 @@ namespace ecommerce_product.Services
 
 
         
-        public override Task<Empty> Delete(ProductID request, ServerCallContext context)
+        public override Task<Empty> Delete(ProductFilter request, ServerCallContext context)
         {
-            var query = db.Products.Find(request.ProductID_);
+            var query = db.Products.Find(request.ProductID);
+            
             db.Products.Remove(new DataAccess.Product()
             {
                 ProductID = query.ProductID,

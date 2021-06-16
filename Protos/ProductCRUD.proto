@@ -4,10 +4,10 @@ option csharp_namespace = "GrpcService1";
 
 service ProductCRUD {
   rpc SelectAll (Empty) returns (Products);
-  rpc SelectByID (ProductID) returns (Product);
+  rpc SelectByID (ProductFilter) returns (Product);
   rpc Insert (Product) returns (Empty);
   rpc Update (Product) returns (Empty);
-  rpc Delete (ProductID) returns (Empty);
+  rpc Delete (ProductFilter) returns (Empty);
 }
 
 message Empty {}
@@ -24,6 +24,6 @@ message Products {
   repeated Product items = 1;
 }
 
-message ProductID {
+message ProductFilter {
   int32 productID = 1;
 }
