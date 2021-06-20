@@ -1,6 +1,5 @@
 # Ecommerce Produto
-Microsserviço em C# para produto com um banco de dados sql. A aplicação é capaz de selecionar todos os produtos.
-
+Microsserviço em C# para produto com um banco de dados sql.
 # Dependências
 ```
 docker
